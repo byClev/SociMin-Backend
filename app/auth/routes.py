@@ -17,17 +17,24 @@ auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
 @auth_bp.post("/register")
 def register():
     data = RegisterSchema().load(request.json)
-    user = auth_service.create_user(**data)
+    user = auth_service.create_user(
+        username=data["username"],
+        email=data["email"],
+        password=data["password"]
+    )
     return jsonify(UserSchema().dump(user)), 201
 
-
+#Lembrar pra possivel bug: O login deve converter o id(int) para string, pois o JWT espera uma string como identidade
 @auth_bp.post("/login")
 def login():
     data = LoginSchema().load(request.json)
-    user = auth_service.authenticate(**data)
+    user = auth_service.authenticate(
+        email=data["email"],
+        password=data["password"]
+    )
 
-    access_token  = create_access_token(identity=user.id)
-    refresh_token = create_refresh_token(identity=user.id)
+    access_token  = create_access_token(identity=str(user.id))
+    refresh_token = create_refresh_token(identity=str(user.id))
 
     return jsonify({
         "access_token":  access_token,
