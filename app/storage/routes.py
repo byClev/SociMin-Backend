@@ -24,6 +24,8 @@ def upload():
 def serve(file_id):
     svc = storage_service
     path = svc.path_for(file_id)
-    if not path or not os.path.exists(path):
+
+    if path is None:
         raise NotFound()
+    
     return send_file(path, conditional=True)

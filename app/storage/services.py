@@ -32,10 +32,7 @@ class StorageService:
         return file_id
 
     def path_for(self, file_id):
-        base = self.upload_dir
-        for name in os.listdir(base):
-            if name.startswith(file_id):
-                return base / name
-        return None
+        matches = list(self.upload_dir.glob(f"{file_id}.*"))
+        return matches[0] if matches else None
 
 storage_service = StorageService()
