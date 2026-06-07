@@ -14,7 +14,9 @@ def create_app(config_class=Config):
     # Register blueprints
     from app.auth import bp as auth_bp
     from app.storage import bp as storage_bp
-    
+    from app.blog import bp as blog_bp
+
+    app.register_blueprint(blog_bp)
     app.register_blueprint(auth_bp)
     app.register_blueprint(storage_bp)
 
