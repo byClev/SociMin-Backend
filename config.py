@@ -11,3 +11,4 @@ class Config:
     JWT_ACCESS_TOKEN_EXPIRES            = timedelta(minutes=15)
     JWT_REFRESH_TOKEN_EXPIRES           = timedelta(days=30)
     JWT_SECRET_KEY                      = os.environ.get('JWT_SECRET_KEY') or SECRET_KEY
+    MAX_CONTENT_LENGTH                  = 5 * 1024 * 1024  # 5MB
