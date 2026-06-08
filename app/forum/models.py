@@ -28,7 +28,7 @@ class ForumPost(db.Model):
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
 
-    forum = db.relationship('Forum', backref=db.backref('posts', lazy=True))
+    forum = db.relationship('Forum', backref=db.backref('posts', lazy=True, passive_deletes=True))
 
     def __repr__(self):
         return f'<ForumPost {self.id} in Forum {self.forum_id}>'
@@ -44,7 +44,7 @@ class ForumComment(db.Model):
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
 
-    post = db.relationship('ForumPost', backref=db.backref('comments', lazy=True))
+    post = db.relationship('ForumPost', backref=db.backref('comments', lazy=True, passive_deletes=True))
 
     def __repr__(self):
         return f'<ForumComment {self.id} on Post {self.post_id}>'

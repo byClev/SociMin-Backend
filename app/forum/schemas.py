@@ -19,7 +19,6 @@ class ForumSchema(Schema):
 
 #Post Schemas-------------------------------------------
 class CreatePostSchema(Schema):
-    forum_id = fields.Int(required=True)
     title    = fields.Str(required=True, validate=validate.Length(min=1, max=32))
     content  = fields.Str(required=True, validate=validate.Length(min=1, max=500))
     image_id = fields.Str(validate=validate.Length(max=32))
@@ -41,7 +40,6 @@ class ForumPostSchema(Schema):
 
 #Comment Schemas------------------------------------------
 class CreateCommentSchema(Schema):
-    post_id = fields.Int(required=True)
     content = fields.Str(required=True, validate=validate.Length(min=1, max=300))
 
 class UpdateCommentSchema(Schema):

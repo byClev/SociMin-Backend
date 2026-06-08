@@ -73,12 +73,12 @@ def delete_forum(forum_id):
 
 # Post routes ------------------------------------------------------------------------------------------
 
-@forum_bp.post("/posts")
+@forum_bp.post("/<int:forum_id>/posts")
 @jwt_required()
-def create_post():
+def create_post(forum_id):
     data = CreatePostSchema().load(request.json)
     post = forum_service.create_post(
-        forum_id=data["forum_id"],
+        forum_id=forum_id,
         user_id=get_jwt_identity(),
         title=data["title"],
         content=data["content"],
