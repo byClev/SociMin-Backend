@@ -15,7 +15,8 @@ def create_post():
         title=data["title"],
         content=data["content"],
         author_id=author_id,
-        image_id=data.get("image_id")
+        image_id=data.get("image_id"),
+        video_url=data.get("video_url")
     )
 
     return jsonify(BlogPostSchema().dump(post)), 201
@@ -45,7 +46,8 @@ def update_post(post_id):
         post_id=post_id,
         title=data.get("title"),
         content=data.get("content"),
-        image_id=data.get("image_id")
+        image_id=data.get("image_id"),
+        video_url=data.get("video_url")
     )
     if not post:
         return jsonify({"message": "Post not found"}), 404

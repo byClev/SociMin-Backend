@@ -17,12 +17,14 @@ def create_app(config_class=Config):
     from app.blog import bp as blog_bp
     from app.forum import bp as forum_bp
     from app.profile import bp as profile_bp
+    from app.chat import bp as chat_bp
 
     app.register_blueprint(blog_bp)
     app.register_blueprint(auth_bp)
     app.register_blueprint(storage_bp)
     app.register_blueprint(forum_bp)
     app.register_blueprint(profile_bp)
+    app.register_blueprint(chat_bp)
 
     @app.route('/health')
     def health_check():

@@ -2,11 +2,13 @@ from marshmallow import Schema, fields, validate
 
 class createProfileSchema(Schema):
     nickname = fields.Str(required=True, validate=validate.Length(min=1, max=32))
+    handle = fields.Str(required=True, validate=validate.Length(min=1, max=32))
     bio = fields.Str(validate=validate.Length(max=500))
     avatar_id = fields.Str(validate=validate.Length(max=32))
 
 class updateProfileSchema(Schema):
     nickname = fields.Str(validate=validate.Length(min=1, max=32))
+    handle = fields.Str(validate=validate.Length(min=1, max=32))
     bio = fields.Str(validate=validate.Length(max=500))
     avatar_id = fields.Str(validate=validate.Length(max=32))
 
@@ -18,6 +20,7 @@ class ProfileSchema(Schema):
     id = fields.Int()
     user_id = fields.Int()
     nickname = fields.Str()
+    handle = fields.Str()
     bio = fields.Str()
     avatar_id = fields.Str()
     created_at = fields.DateTime()

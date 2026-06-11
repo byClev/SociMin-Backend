@@ -8,6 +8,7 @@ class BlogPost(db.Model):
     title = db.Column(db.String(64), nullable=False)
     content = db.Column(db.Text, nullable=False)
     image_id = db.Column(db.String(32), nullable=True)
+    video_url = db.Column(db.String(255), nullable=True)
     author_id = db.Column(db.Integer, nullable=False)
 
     created_at = db.Column(db.DateTime, server_default=func.now())

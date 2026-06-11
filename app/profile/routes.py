@@ -14,6 +14,7 @@ def create_profile():
     profile = profile_service.create_profile(
         user_id=user_id,
         nickname=data["nickname"],
+        handle=data["handle"],
         bio=data.get("bio"),
         avatar_id=data.get("avatar_id")
     )
@@ -37,6 +38,7 @@ def update_profile():
         profile = profile_service.update_profile(
             user_id=user_id,
             nickname=data.get("nickname"),
+            handle=data.get("handle"),
             bio=data.get("bio"),
             avatar_id=data.get("avatar_id")
         )

@@ -3,11 +3,11 @@ from app.extensions import db
 
 class ProfileService:
 
-    def create_profile(self, user_id: int, nickname: str, bio: str = None, avatar_id: str = None) -> Profile:
+    def create_profile(self, user_id: int, nickname: str, handle: str, bio: str = None, avatar_id: str = None) -> Profile:
         if Profile.query.filter_by(user_id=user_id).first():
             raise ValueError("Profile already exists for this user.")
         
-        profile = Profile(user_id=user_id, nickname=nickname, bio=bio, avatar_id=avatar_id)
+        profile = Profile(user_id=user_id, nickname=nickname, handle=handle, bio=bio, avatar_id=avatar_id)
         db.session.add(profile)
         db.session.commit()
         return profile
@@ -23,13 +23,15 @@ class ProfileService:
             .all()
         )
     
-    def update_profile(self, user_id: int, nickname: str = None, bio: str = None, avatar_id: str = None) -> Profile:
+    def update_profile(self, user_id: int, nickname: str = None, handle: str = None, bio: str = None, avatar_id: str = None) -> Profile:
         profile = self.get_profile_by_user_id(user_id)
         if not profile:
             raise ValueError("Profile not found.")
         
         if nickname is not None:
             profile.nickname = nickname
+        if handle is not None:
+            profile.handle = handle
         if bio is not None:
             profile.bio = bio
         if avatar_id is not None:

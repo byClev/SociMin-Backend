@@ -22,11 +22,13 @@ class CreatePostSchema(Schema):
     title    = fields.Str(required=True, validate=validate.Length(min=1, max=32))
     content  = fields.Str(required=True, validate=validate.Length(min=1, max=500))
     image_id = fields.Str(validate=validate.Length(max=32))
+    video_url = fields.Str(validate=validate.Length(max=255))
 
 class UpdatePostSchema(Schema):
     title    = fields.Str(validate=validate.Length(min=1, max=32))
     content  = fields.Str(validate=validate.Length(min=1, max=500))
     image_id = fields.Str(validate=validate.Length(max=32))
+    video_url = fields.Str(validate=validate.Length(max=255))
 
 class ForumPostSchema(Schema):
     id         = fields.Int(dump_only=True)
@@ -35,6 +37,7 @@ class ForumPostSchema(Schema):
     title      = fields.Str(dump_only=True)
     content    = fields.Str(dump_only=True)
     image_id   = fields.Str(dump_only=True)
+    video_url  = fields.Str(dump_only=True)
     created_at = fields.DateTime(dump_only=True)
     updated_at = fields.DateTime(dump_only=True)
 

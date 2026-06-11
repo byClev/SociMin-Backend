@@ -9,6 +9,7 @@ class Profile(db.Model):
     
     # dados básicos
     nickname   = db.Column(db.String(64), nullable=False)
+    handle     = db.Column(db.String(64), unique=True, nullable=False)
     bio        = db.Column(db.Text, nullable=True)
     avatar_id  = db.Column(db.String(32), nullable=True)  # file_id do storage
 

@@ -82,7 +82,8 @@ def create_post(forum_id):
         user_id=get_jwt_identity(),
         title=data["title"],
         content=data["content"],
-        image_id=data.get("image_id")
+        image_id=data.get("image_id"),
+        video_url=data.get("video_url")
     )
     return jsonify(ForumPostSchema().dump(post)), 201
 
@@ -119,7 +120,8 @@ def update_post(post_id):
         user_id=int(get_jwt_identity()),
         title=data.get("title"),
         content=data.get("content"),
-        image_id=data.get("image_id")
+        image_id=data.get("image_id"),
+        video_url=data.get("video_url")
     )
     if not post:
         return jsonify({"message": "Post not found"}), 404

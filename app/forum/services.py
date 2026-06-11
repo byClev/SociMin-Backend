@@ -42,8 +42,8 @@ class ForumService:
         db.session.commit()
         return True
 # Post services------------------------------------------------------------------------------------------
-    def create_post(self, forum_id: int, user_id: int, title: str, content: str, image_id: str = None) -> ForumPost:
-        post = ForumPost(forum_id=forum_id, user_id=user_id, title=title, content=content, image_id=image_id)
+    def create_post(self, forum_id: int, user_id: int, title: str, content: str, image_id: str = None, video_url: str = None) -> ForumPost:
+        post = ForumPost(forum_id=forum_id, user_id=user_id, title=title, content=content, image_id=image_id, video_url=video_url)
         db.session.add(post)
         db.session.commit()
         return post
@@ -59,7 +59,7 @@ class ForumService:
             query = query.filter_by(user_id=user_id)
         return query.order_by(ForumPost.created_at.desc()).paginate(page=page, per_page=per_page, error_out=False)
 
-    def update_post(self, post_id: int, user_id: int, title: str = None, content: str = None, image_id: str = None) -> ForumPost:
+    def update_post(self, post_id: int, user_id: int, title: str = None, content: str = None, image_id: str = None, video_url: str = None) -> ForumPost:
         post = ForumPost.query.get(post_id)
         if not post:
             return None
@@ -70,6 +70,8 @@ class ForumService:
             post.title = title
         if content:
             post.content = content
+        if video_url is not None:  # String vazia é diferente de None, permite remover o vídeo
+            post.video_url = video_url
         if image_id is not None:  # Sting vazia é diferente de None, permite remover a imagem
             post.image_id = image_id
         

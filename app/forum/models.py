@@ -24,6 +24,7 @@ class ForumPost(db.Model):
     title = db.Column(db.String(32), nullable=False)
     content = db.Column(db.Text, nullable=False)
     image_id = db.Column(db.String(32), nullable=True)
+    video_url = db.Column(db.String(255), nullable=True)
 
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
